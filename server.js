@@ -47,3 +47,11 @@ app.post('/download', (req, res) => {
 // server port
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+
+exec(`yt-dlp -j "${url}"`, (err, stdout, stderr) => {
+  if(err){
+    console.log('YT-DLP Error:', stderr);
+    return res.json({ error: "Failed to fetch video" });
+  }
+  console.log('YT-DLP Output:', stdout);
+});
